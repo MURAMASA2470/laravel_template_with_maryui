@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // 日本円に固定
+        Number::useCurrency('JPY');
     }
 }
