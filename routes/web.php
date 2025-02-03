@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
- 
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +17,4 @@ use Livewire\Volt\Volt;
 
 Volt::route('/counter', 'counter')->name('counter');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Volt::route('/', 'dashboard')->name('dashboard');

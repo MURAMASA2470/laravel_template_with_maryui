@@ -16,8 +16,13 @@
     <link rel="icon" type="image/png" sizes="512x512" href="{{ asset('android-chrome-512x512.png') }} ">
 
     <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+
+    {{-- Chart.js  --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
-<body class="min-h-screen font-sans antialiased bg-base-200/50 dark:bg-base-200">
+
+<x-mary-theme-toggle class="hidden" darkTheme="dark" lightTheme="light" />
+<body class="min-h-screen font-sans antialiased bg-base-200/50 dark:bg-base-200 xl:px-52 lg:px-24 md:px-0">
 
     {{-- NAVBAR mobile only --}}
     <x-mary-nav sticky class="lg:hidden">
@@ -43,22 +48,50 @@
             <x-mary-menu activate-by-route>
 
                 {{-- User --}}
-                @if($user = auth()->user())
-                    <x-mary-menu-separator />
+                {{-- @if($user = auth()->user()) --}}
+                <x-mary-menu-separator />
+<?php
+$user = [
+    'user_name' => 'テストユーザー',
+    'user_cd' => 'test@example.co.jp'
+    ];
+?>
+                <x-mary-list-item :item="$user" value="user_name" sub-value="user_cd" no-separator no-hover
+                              class="!-my-2 -mx-2 rounded" x-show="!collapsed">
+                    <x-slot:avatar>
+                        <x-mary-icon name="o-user" class="h-9 w-9 rounded-full bg-gray-500 p-2 text-white" />
+                    </x-slot:avatar>
+                    <x-slot:actions>
 
-                    <x-mary-list-item :item="$user" value="name" sub-value="email" no-separator no-hover class="-mx-2 !-my-2 rounded">
-                        <x-slot:actions>
-                            <x-mary-button icon="o-power" class="btn-circle btn-ghost btn-xs" tooltip-left="logoff" no-wire-navigate link="/logout" />
-                        </x-slot:actions>
-                    </x-mary-list-item>
+                        <x-mary-dropdown icon="o-cog-6-tooth" class="btn-circle btn-ghost btn-sm" x-cloak>
 
-                    <x-mary-menu-separator />
-                @endif
+                            <x-mary-menu-item title="パスワード設定" icon="o-key"
+                                            link="#" />
 
-                <x-mary-menu-item title="Hello" icon="o-sparkles" link="/" />
-                <x-mary-menu-sub title="Settings" icon="o-cog-6-tooth">
-                    <x-mary-menu-item title="Wifi" icon="o-wifi" link="####" />
-                    <x-mary-menu-item title="Archives" icon="o-archive-box" link="####" />
+                            <x-mary-menu-item title="メールアドレス変更" icon="o-envelope"
+                                            link="#" />
+
+                            <x-mary-menu-item title="テーマ切り替え" icon="o-swatch"
+                                            @click="$dispatch('mary-toggle-theme')" />
+
+                            <x-mary-menu-item title="ログアウト" icon="o-power" tooltip-left="logoff" no-wire-navigate
+                                            link="/logout" />
+
+                        </x-mary-dropdown>
+                    </x-slot:actions>
+
+                </x-mary-list-item>
+
+                <x-mary-menu-separator />
+                {{-- @endif --}}
+
+                <x-mary-menu-item title="ダッシュボード" icon="o-presentation-chart-line" link="/" />
+                <x-mary-menu-item title="一覧" icon="o-clipboard-document-list" link="#" />
+                <x-mary-menu-item title="設定" icon="o-cog-6-tooth" link="#" />
+                <x-mary-menu-sub title="その他" icon="o-command-line">
+                    <x-mary-menu-item title="その他１" icon="o-wifi" link="#" />
+                    <x-mary-menu-item title="その他２" icon="o-archive-box" link="#" />
+                    <x-mary-menu-item title="その他３" icon="o-rocket-launch" link="#" />
                 </x-mary-menu-sub>
             </x-mary-menu>
         </x-slot:sidebar>
@@ -71,7 +104,6 @@
 
     {{--  TOAST area --}}
     <x-mary-toast />
-</body>
 @stack('scripts')
 </body>
 
