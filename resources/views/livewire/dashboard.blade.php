@@ -56,27 +56,27 @@ new class extends Component {
     </x-mary-header>
 
     <div>
-        <div class="grid grid-cols-12 gap-6">
+        <div class="grid grid-cols-12 gap-3 xl:gap-6">
             <div class="col-span-6 xl:col-span-3">
-                <x-mary-stat title="Messages" value="44" icon="o-envelope" />
+                <x-mary-stat title="通知" value="44" icon="o-envelope" />
             </div>
 
             <div class="col-span-6 xl:col-span-3">
-                <x-mary-stat title="Sales" value="22.124" icon="o-arrow-trending-up" />
+                <x-mary-stat title="売上高" value="22.124" icon="o-arrow-trending-up" />
             </div>
 
             <div class="col-span-6 xl:col-span-3">
-                <x-mary-stat title="Lost" value="34" icon="o-arrow-trending-down" />
+                <x-mary-stat title="失注数" value="34" icon="o-arrow-trending-down" />
             </div>
 
             <div class="col-span-6 xl:col-span-3">
-                <x-mary-stat title="Sales" value="22.124" icon="o-arrow-trending-down"
+                <x-mary-stat title="損失額" value="22.124" icon="o-arrow-trending-down"
                         class="text-orange-500"
                         color="text-pink-500" />
             </div>
         </div>
 
-        <div class="grid grid-cols-12 gap-6 mt-6">
+        <div class="grid grid-cols-12 gap-3 xl:gap-6 mt-3 xl:mt-6">
             <div class="col-span-12 xl:col-span-7">
                 <x-mary-card title='パネル' separator shadow class="h-full">
                     <x-mary-chart wire:model="lineChart" class="w-full" />
@@ -109,7 +109,7 @@ new class extends Component {
         ]);
     @endphp
 
-    <x-mary-table :headers="$headers" :rows="$users" class="bg-base-100 mt-6">
+    <x-mary-table :headers="$headers" :rows="$users" class="bg-base-100 mt-3 xl:mt-6">
         @scope('cell_city', $user)
             <x-mary-badge :value="$user->city" class="badge-primary" />
         @endscope
