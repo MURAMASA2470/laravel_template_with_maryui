@@ -9,11 +9,12 @@ export default defineConfig({
         }),
     ],
     server: {
-      host: process.env.VITE_HMR_HOST || "0.0.0.0",
+      host: true,
       port: process.env.VITE_PORT || 5173,
       hmr: {
-          host: process.env.VITE_HMR_HOST || "0.0.0.0",
+          host: process.env.VITE_HMR_HOST || "127.0.0.1",
           port: process.env.VITE_PORT || 5173,
       },
     },
 });
+
