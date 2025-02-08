@@ -6,7 +6,7 @@ services:
     ports:
       - "80:80"
       - "8080:8080"
-    restart: no
+    restart: unless-stopped
     networks:
       - :tmp:_networks
     depends_on:
@@ -23,14 +23,14 @@ services:
       MYSQL_DATABASE: :tmp:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
-      TZ: 'Asia/Tokyo'
+      command: --default-time-zone='Asia/Tokyo'
     volumes:
       - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
-      - ./docker/mysql/mysql-data:/var/lib/mysql"
+      - ./docker/mysql/mysql-data:/var/lib/mysql
       - ./storage/logs/mysql:/var/log/mysql
     ports:
       - "3306:3306"
-    restart: no
+    restart: unless-stopped
     networks:
       - :tmp:_networks
   app:
@@ -44,7 +44,7 @@ services:
     ports:
       - "9912:9912"
       - "5173:5173"
-    restart: no
+    restart: unless-stopped
     networks:
       - :tmp:_networks
     working_dir: /src
@@ -59,7 +59,7 @@ services:
       - mysql
     ports:
       - "3000:80"
-    restart: no
+    restart: unless-stopped
     networks:
       - :tmp:_networks
     environment:
